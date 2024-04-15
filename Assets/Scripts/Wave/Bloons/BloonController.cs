@@ -6,8 +6,7 @@ using UnityEngine;
 namespace ServiceLocator.Wave.Bloon
 {
     public class BloonController
-    {            
-        private SoundService soundService;
+    {                   
         private BloonView bloonView;
         private BloonScriptableObject bloonScriptableObject;
         private const float waypointThreshold = 0.1f;
@@ -16,9 +15,8 @@ namespace ServiceLocator.Wave.Bloon
         private int currentWaypointIndex;
         private BloonState currentState;
         public Vector3 Position => bloonView.transform.position;
-        public BloonController(SoundService soundService, BloonView bloonPrefab, Transform bloonContainer)
-        {                   
-            this.soundService = soundService;
+        public BloonController(BloonView bloonPrefab, Transform bloonContainer)
+        {                             
             bloonView = Object.Instantiate(bloonPrefab, bloonContainer);
             bloonView.Controller = this;
         }
@@ -59,7 +57,7 @@ namespace ServiceLocator.Wave.Bloon
             if (currentHealth <= 0 && currentState == BloonState.ACTIVE)
             {
                 PopBloon();
-                soundService.PlaySoundEffects(Sound.SoundType.BloonPop);
+                SoundService.Instance.PlaySoundEffects(Sound.SoundType.BloonPop);
             }
         }
 

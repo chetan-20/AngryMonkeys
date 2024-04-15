@@ -12,10 +12,7 @@ namespace ServiceLocator.Wave
 {
     public class WaveService : MonoBehaviour
     {
-        [SerializeField] private EventService eventService;
-        [SerializeField] private UIService uiService;      
-        [SerializeField] private SoundService soundService;        
-
+        [SerializeField] private EventService eventService;                    
         [SerializeField] private WaveScriptableObject waveScriptableObject;
         private BloonPool bloonPool;
 
@@ -38,7 +35,7 @@ namespace ServiceLocator.Wave
 
         private void InitializeBloons()
         {
-            bloonPool = new BloonPool(soundService, waveScriptableObject);
+            bloonPool = new BloonPool(waveScriptableObject);
             activeBloons = new List<BloonController>();
         }
 
@@ -48,7 +45,7 @@ namespace ServiceLocator.Wave
         {
             currentWaveId = 0;
             waveDatas = waveScriptableObject.WaveConfigurations.Find(config => config.MapID == mapId).WaveDatas;
-            uiService.UpdateWaveProgressUI(currentWaveId, waveDatas.Count);
+            UIService.Instance.UpdateWaveProgressUI(currentWaveId, waveDatas.Count);
         }
 
         public void StarNextWave()
@@ -84,13 +81,13 @@ namespace ServiceLocator.Wave
             activeBloons.Remove(bloon);
             if (HasCurrentWaveEnded())
             {
-                soundService.PlaySoundEffects(Sound.SoundType.WaveComplete);
-                uiService.UpdateWaveProgressUI(currentWaveId, waveDatas.Count);
+                SoundService.Instance.PlaySoundEffects(Sound.SoundType.WaveComplete);
+                UIService.Instance.UpdateWaveProgressUI(currentWaveId, waveDatas.Count);
 
                 if(IsLevelWon())
-                    uiService.UpdateGameEndUI(true);
+                    UIService.Instance.UpdateGameEndUI(true);
                 else
-                    uiService.SetNextWaveButton(true);
+                    UIService.Instance.SetNextWaveButton(true);
             }
         }
 

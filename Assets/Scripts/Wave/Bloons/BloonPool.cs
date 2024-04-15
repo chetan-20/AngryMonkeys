@@ -13,15 +13,13 @@ using ServiceLocator.Player;
 namespace ServiceLocator.Wave.Bloon
 {
     public class BloonPool : GenericObjectPool<BloonController>
-    {             
-        private SoundService soundService;
+    {                   
         private BloonView bloonPrefab;
         private List<BloonScriptableObject> bloonScriptableObjects;
         private Transform bloonContainer;
 
-        public BloonPool(SoundService soundService, WaveScriptableObject waveScriptableObject)
-        {                      
-            this.soundService = soundService;
+        public BloonPool(WaveScriptableObject waveScriptableObject)
+        {                                
             this.bloonPrefab = waveScriptableObject.BloonPrefab;
             this.bloonScriptableObjects = waveScriptableObject.BloonScriptableObjects;
             this.bloonContainer = new GameObject("Bloon Container").transform;
@@ -35,6 +33,6 @@ namespace ServiceLocator.Wave.Bloon
             return bloon;
         }
 
-        protected override BloonController CreateItem() => new BloonController(soundService, bloonPrefab, bloonContainer);
+        protected override BloonController CreateItem() => new BloonController(bloonPrefab, bloonContainer);
     }
 }

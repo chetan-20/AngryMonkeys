@@ -22,7 +22,14 @@ namespace ServiceLocator.Wave
         private int currentWaveId;
         private List<WaveData> waveDatas;
         private List<BloonController> activeBloons;
+        private static WaveService instance;
+        public static WaveService Instance { get { return instance; } }
 
+        private void Awake()
+        {
+            if (instance == null) { instance = this; }
+            else { Destroy(this.gameObject); }
+        }
         private void Start()
         {
             InitializeBloons();
@@ -31,7 +38,7 @@ namespace ServiceLocator.Wave
 
         private void InitializeBloons()
         {
-            bloonPool = new BloonPool(this, soundService, waveScriptableObject);
+            bloonPool = new BloonPool(soundService, waveScriptableObject);
             activeBloons = new List<BloonController>();
         }
 

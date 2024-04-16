@@ -14,3 +14,4 @@ public class GenericMonoSingleton<T> : MonoBehaviour where T : GenericMonoSingle
         else { Destroy(this.gameObject); }
     }
 }
+//

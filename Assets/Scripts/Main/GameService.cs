@@ -28,11 +28,12 @@ public class GameService : GenericMonoSingleton<GameService>
     
     private void Start()
     { 
-        EventService = new EventService();
+        EventService = new EventService();    
         playerserivce = new PlayerService(playerScriptableObject);
         soundservice = new SoundService(soundScriptableObject,audioEffects,backgroundMusic);
         waveservice = new WaveService(waveScriptableObject);
         mapservice = new MapService(mapScriptableObject);
+        UIService.SubscribeToEvents();
     }
 
     private void Update()

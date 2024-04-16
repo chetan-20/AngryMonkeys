@@ -51,7 +51,7 @@ namespace ServiceLocator.UI
             quitButton.onClick.AddListener(OnQuitButtonClicked);
             playAgainButton.onClick.AddListener(OnPlayAgainButtonClicked);
             
-            SubscribeToEvents();
+           
         }
 
         public void SubscribeToEvents() => GameService.Instance.EventService.OnMapSelected.AddListener(OnMapSelected);
